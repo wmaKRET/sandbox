@@ -1,0 +1,16 @@
+.footer {
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: $background2;
+
+
+    &-item {
+        padding: 0.5em;
+        color: $background;        
+        text-align: center;
+        font-size: $font-sm;
+    }
+}

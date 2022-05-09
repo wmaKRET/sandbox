@@ -1,0 +1,16 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 2rem;
+    background-color: $background2;
+
+    &-item {
+        padding: 0 1rem;
+        font-size: $font-std;
+
+        transition: all 0.2s ease-out;
+        &:hover {
+            color: $background;
+        }
+    }
+}
