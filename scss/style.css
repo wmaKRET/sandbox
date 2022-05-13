@@ -99,10 +99,20 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 
-.container-header :nth-child(2) {
-  color: #777777;
+.container-header .disabled {
+  border: solid #c07171 2px;
+}
+
+.container-header .disabled:hover {
+  border: solid #c07171 2px;
+}
+
+.container-header .failure {
+  color: #c07171;
 }
 
 .container-header-item {
@@ -110,31 +120,31 @@ a {
 }
 
 .container-header-input {
+  width: 300px;
   text-align: center;
   font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.808);
   background-color: #a5a5a5;
   border: solid #777777 2px;
   border-radius: 5px;
-  width: 300px;
-  color: rgba(255, 255, 255, 0.808);
   outline: none;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
 .container-header-input:focus {
-  background-color: #777777;
   color: white;
+  background-color: #777777;
   border: solid white 2px;
 }
 
 .container-header-button {
-  font-size: 1.25rem;
   width: 300px;
-  border: solid #777777 2px;
-  border-radius: 5px;
+  font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.808);
   background-color: #777777;
+  border: solid #777777 2px;
+  border-radius: 5px;
   cursor: pointer;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -146,6 +156,7 @@ a {
 }
 
 .container-list {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -156,10 +167,11 @@ a {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding: 1em;
-  width: 100%;
 }
 
 .container-list-item {
+  width: 250px;
+  height: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -167,18 +179,16 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 250px;
-  height: 100px;
   margin: 0.5em;
-  background-color: #777777;
-  border: solid #777777 2px;
-  border-radius: 5px;
-  color: #a5a5a5;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  color: #a5a5a5;
+  background-color: #777777;
+  border: solid #777777 2px;
+  border-radius: 5px;
   cursor: pointer;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -194,8 +204,8 @@ a {
 }
 
 .container-list-item-active {
-  border: solid white 2px;
   color: white;
+  border: solid white 2px;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }

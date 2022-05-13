@@ -3,8 +3,7 @@ $background: rgb(165, 165, 165);
 $background2: rgb(119, 119, 119);
 $almostwhite: rgba(255, 255, 255, 0.808);
 $white: white;
-$content: red;
-$active: black;
+$warning: rgb(192, 113, 113);
 
 // FONTS
 $font-sm: 0.75rem;
@@ -33,7 +32,7 @@ a {
     text-decoration: none;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
 
@@ -57,8 +56,17 @@ a {
         justify-content: center;
         align-items: center;
 
-        :nth-child(2){
-            color: $background2;
+        transition: all 0.2s ease-out;
+        .disabled {
+            border: solid $warning 2px;
+
+            &:hover {
+                border: solid $warning 2px; 
+            }
+        }
+
+        .failure {
+            color: $warning;
         }
 
         &-item {
@@ -66,30 +74,30 @@ a {
         }
 
         &-input {
+            width: 300px;
             text-align: center;
             font-size: $font-md;
+            color: $almostwhite;
             background-color: $background;
             border: solid $background2 2px;
             border-radius: 5px;
-            width: 300px;
-            color: $almostwhite;
             outline: none;
 
             transition: all 0.2s ease-out;
-            &:focus{
-                background-color: $background2;
+            &:focus {
                 color: $white;
+                background-color: $background2;
                 border: solid $white 2px
             }
         }
 
         &-button {
-            font-size: $font-md;
             width: 300px;
-            border: solid $background2 2px;
-            border-radius: 5px;
+            font-size: $font-md;
             color: $almostwhite;
             background-color: $background2;
+            border: solid $background2 2px;
+            border-radius: 5px;
             cursor: pointer;
 
             transition: all 0.2s ease-out;
@@ -101,24 +109,24 @@ a {
     }
 
     &-list {
+        width: 100%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         padding: 1em;
-        width: 100%;
 
         &-item {
-            display: flex;
-            flex-direction: column;
             width: 250px;
             height: 100px;
+            display: flex;
+            flex-direction: column;
             margin: 0.5em;
+            justify-content: space-around;
+            align-items: center;
+            color: $background;
             background-color: $background2;
             border: solid $background2 2px;
             border-radius: 5px;
-            color: $background;
-            align-items: center;
-            justify-content: space-around;
             cursor: pointer;
 
             p {
@@ -131,9 +139,9 @@ a {
                 border: solid $almostwhite 2px;
             }
 
-            &-active{
-                border: solid $white 2px;
+            &-active {
                 color: $white;
+                border: solid $white 2px;
 
                 transition: all 0.2s ease-out;
                 &:hover {

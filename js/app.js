@@ -39,12 +39,48 @@ function clearInput(){
     valuesInput.value = ''
 }
 
+function checkIfInputIsValid(){
+    const re = /^\d+(,\d+)$/    // REGULAR EXPRESSION TO CHECK IF INPUT IS CORRECT (number,number)
+    const values = getInputValues().join(',')
+    return re.test(values)
+}
+
+function displayInfo(message, action){
+    const info = document.querySelector('#math-values-info')
+    info.textContent = message
+    info.classList.add(action)
+    setTimeout(() => {
+        info.textContent = 'Please enter values like so: a,b'
+        info.classList.remove(action)
+    }, 2000)
+}
+
+function disableInputAndButton(){
+    const valuesInput = document.querySelector('#values')
+    button.disabled = true
+    valuesInput.disabled = true
+    button.classList.toggle('disabled')
+    valuesInput.classList.toggle('disabled')
+    setTimeout(() => {
+        button.disabled = false
+        valuesInput.disabled = false
+        button.classList.toggle('disabled')
+        valuesInput.classList.toggle('disabled')
+    }, 2000)
+}
+
 // EVENT LISTENERS
 button.addEventListener('click', function(){
-    const whichBoxIsActive = document.querySelector('.container-list-item-active')
-    const result = document.querySelector('#math-result')
-    const values = getInputValues()
-    result.innerText = executeFunctionByName(whichBoxIsActive.dataset.functionName, ...values)
+    if (checkIfInputIsValid()){
+        const whichBoxIsActive = document.querySelector('.container-list-item-active')
+        const result = document.querySelector('#math-result')
+        const values = getInputValues()
+        result.innerText = executeFunctionByName(whichBoxIsActive.dataset.functionName, ...values)
+    } else {
+        disableInputAndButton()
+        displayInfo('Please enter two values separated by comma. (a,b)', 'failure')
+    }
+    clearInput()
 })
 
 actionBtns.forEach(button => {
