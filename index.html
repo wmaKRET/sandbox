@@ -11,13 +11,35 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="./index.html" class="navbar-item">sandbox</a>
-            <a href="" class="navbar-item">color flipper</a>
-            <a href="" class="navbar-item">counter</a>
+            <a href="./index.html" class="navbar-item">js math</a>
+            <a href="" class="navbar-item">color flipper etc</a>
+            <a href="" class="navbar-item">some other stuff</a>
         </nav>
     </header>
-    <main>
+    <main class="container">
+        <div class="container-header">
+            <p class="container-title containter-header-item">CHOOSE BOX AND ENTER VALUES</p>
+            <p class="container-title containter-header-item" id="math-values-info">Please enter values like so: a,b</p>
+            <input type="text" name="values" id="math-values" placeholder="a,b" class="container-header-input containter-header-item"">    
+        </div>
+        <div class="container-list">
+            <div class="container-list-item container-list-active">
+                <p class="container-title">a + b</p>
+                <p class="container-info">Sums two values</p>
+                <p class="container-result">__</p>
+            </div>
+            <div class="container-list-item">
+                <p class="container-title">a - b</p>
+                <p class="container-info">Subtract two values</p>
+                <p class="container-result">__</p>
+            </div>
+            <div class="container-list-item">
+                <p class="container-title">a * b</p>
+                <p class="container-info">Multiplies two values</p>
+                <p class="container-result">__</p>
+            </div>
 
+        </div>
     </main>
     <footer class="footer">
         <p class="footer-item">wmaKRET</p>
