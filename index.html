@@ -12,33 +12,31 @@
     <header>
         <nav class="navbar">
             <a href="./index.html" class="navbar-item">js math</a>
-            <a href="" class="navbar-item">color flipper etc</a>
-            <a href="" class="navbar-item">some other stuff</a>
+            <a href="" class="navbar-item">under construction</a>
+            <a href="" class="navbar-item">under construction</a>
         </nav>
     </header>
     <main class="container">
         <div class="container-header">
-            <p class="container-title containter-header-item">CHOOSE BOX AND ENTER VALUES</p>
-            <p class="container-title containter-header-item" id="math-values-info">Please enter values like so: a,b</p>
-            <input type="text" name="values" id="math-values" placeholder="a,b" class="container-header-input containter-header-item"">    
+            <p class="container-header-item container-title ">CHOOSE BUTTON AND ENTER VALUES</p>
+            <p class="container-header-item container-title " id="math-values-info">Please enter values like so: a,b</p>
+            <input type="text" name="values" id="values" placeholder="a,b" class=" container-header-item container-header-input">    
+            <button class="container-header-item container-header-button" id="math-button">press here</button>
+            <p class="container-header-item container-result" id="math-result">__</p>
         </div>
         <div class="container-list">
-            <div class="container-list-item container-list-active">
+            <button class="container-list-item container-list-item-active" data-function-name="sum">
                 <p class="container-title">a + b</p>
                 <p class="container-info">Sums two values</p>
-                <p class="container-result">__</p>
-            </div>
-            <div class="container-list-item">
+            </button>
+            <button class="container-list-item" data-function-name="subtract">
                 <p class="container-title">a - b</p>
                 <p class="container-info">Subtract two values</p>
-                <p class="container-result">__</p>
-            </div>
-            <div class="container-list-item">
+            </button>
+            <button class="container-list-item" data-function-name="multiply">
                 <p class="container-title">a * b</p>
                 <p class="container-info">Multiplies two values</p>
-                <p class="container-result">__</p>
-            </div>
-
+            </button>
         </div>
     </main>
     <footer class="footer">
