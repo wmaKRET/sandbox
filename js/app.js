@@ -3,21 +3,33 @@ const button = document.querySelector('#math-button')
 const actionBtns = document.querySelectorAll('[data-function-name]')
 
 // JS MATH FUNCTIONS
-function sum(a, b){
-    return a + b
-}
+const mathFunction = (function(){
+    function add(a, b){
+        return a + b
+    }
+    
+    function subtract(a, b){
+        return a - b
+    }
+    
+    function multiply(a, b){
+        return a * b
+    }
 
-function subtract(a, b){
-    return a - b
-}
-
-function multiply(a, b){
-    return a * b
-}
+    function divide(a,b){
+        return a / b
+    }
+    return {
+        add,
+        subtract,
+        multiply,
+        divide
+    }
+})()
 
 // EXECUTE FUNCTION 
 function executeFunctionByName(callback, ...args){
-    return window[callback](...args)
+    return mathFunction[callback](...args)
 }
 
 // OTHER FUNCTIONS
@@ -39,10 +51,15 @@ function clearInput(){
     valuesInput.value = ''
 }
 
+function cantDivideByZero(){
+    const values = getInputValues().join(',')  
+    console.log(values)
+}
+
 function checkIfInputIsValid(){
-    const re = /^\d+(,\d+)$/    // REGULAR EXPRESSION TO CHECK IF INPUT IS CORRECT (number,number)
+    const regularExpression = /^\d+(,\d+)$/    // CHECKING IF INPUT IS CORRECT (number,number)
     const values = getInputValues().join(',')
-    return re.test(values)
+    return regularExpression.test(values)
 }
 
 function displayInfo(message, action){
@@ -75,12 +92,18 @@ button.addEventListener('click', function(){
         const whichBoxIsActive = document.querySelector('.container-list-item-active')
         const result = document.querySelector('#math-result')
         const values = getInputValues()
-        result.innerText = executeFunctionByName(whichBoxIsActive.dataset.functionName, ...values)
+        if (whichBoxIsActive.dataset.functionName === 'divide' && values[1] === 0) {
+            disableInputAndButton()
+            displayInfo(`You can't divide by 0!! Please enter two values separated by comma. (a,b)`, 'failure')
+            clearInput()
+        } else {
+            result.innerText = executeFunctionByName(whichBoxIsActive.dataset.functionName, ...values)
+        }
     } else {
         disableInputAndButton()
         displayInfo('Please enter two values separated by comma. (a,b)', 'failure')
+        clearInput()
     }
-    clearInput()
 })
 
 actionBtns.forEach(button => {
