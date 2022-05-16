@@ -1,6 +1,7 @@
 // DECLARATIONS
 const button = document.querySelector('#math-button')
 const actionBtns = document.querySelectorAll('[data-function-name]')
+const valuesInput = document.querySelector('#values')
 
 // JS MATH FUNCTIONS
 const mathFunction = (function(){
@@ -64,19 +65,12 @@ function toggleActiveButton(){
 }
 
 function getInputValues(){
-    const valuesInput = document.querySelector('#values')
     const values = valuesInput.value.split(',').map(value => parseInt(value))
     return [...values]
 }
 
 function clearInput(){
-    const valuesInput = document.querySelector('#values')
     valuesInput.value = ''
-}
-
-function cantDivideByZero(){
-    const values = getInputValues().join(',')  
-    console.log(values)
 }
 
 function checkIfInputIsValid(){
@@ -96,16 +90,15 @@ function displayInfo(message, action){
 }
 
 function disableInputAndButton(){
-    const valuesInput = document.querySelector('#values')
     button.disabled = true
     valuesInput.disabled = true
-    button.classList.toggle('disabled')
-    valuesInput.classList.toggle('disabled')
+    button.classList.add('disabled')
+    valuesInput.classList.add('disabled')
     setTimeout(() => {
         button.disabled = false
         valuesInput.disabled = false
-        button.classList.toggle('disabled')
-        valuesInput.classList.toggle('disabled')
+        button.classList.remove('disabled')
+        valuesInput.classList.remove('disabled')
     }, 2000)
 }
 
@@ -121,14 +114,14 @@ button.addEventListener('click', function(){
     const whichBoxIsActive = document.querySelector('.container-list-item-active')
     const result = document.querySelector('#math-result')
     const values = getInputValues()
-    // DIVISION CONDITION - SECOND VALUE IS NOT 0
+    // DIVISION CONDITION, SECOND VALUE = 0
     if (whichBoxIsActive.dataset.functionName === 'divide' && values[1] === 0){
         disableInputAndButton()
         displayInfo(`You can't divide by 0! Please enter two values separated by comma. (a,b)`, 'failure')
         clearInput()
         return
     }
-    // LCM CONDITION - FIRST OR SECOND VALUE IS NOT 0
+    // LCM CONDITION, FIRST OR SECOND VALUE < 0
     if (whichBoxIsActive.dataset.functionName === 'nww' && (values[0] <= 0 || values[1] <= 0)){
         disableInputAndButton()
         displayInfo(`Please provide positive integers!! Please enter two values separated by comma. (a,b)`, 'failure')
