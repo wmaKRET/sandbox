@@ -19,11 +19,34 @@ const mathFunction = (function(){
     function divide(a,b){
         return a / b
     }
+
+    function nwd(a,b){ // greatest common divisor (największy wspólny dzielnik)
+        if (a === 0 && b === 0) return 0
+        if (a === 0) return Math.abs(b)
+        if (b === 0) return Math.abs(a)
+
+        function dividedBy(number){
+            let array = []
+            for (let i = 1; i <= Math.abs(number); i++){
+                if (number % i === 0) array.push(i)
+            }
+            return array.sort((x,y) => y - x)
+        }
+        const secondArray = dividedBy(b)
+        return dividedBy(a).find(elem => secondArray.includes(elem))
+    }
+
+    function nww(a,b){
+        return (a * b) / nwd(a,b)
+    }
+
     return {
         add,
         subtract,
         multiply,
-        divide
+        divide,
+        nwd,
+        nww
     }
 })()
 
@@ -42,7 +65,7 @@ function toggleActiveButton(){
 
 function getInputValues(){
     const valuesInput = document.querySelector('#values')
-    const values = valuesInput.value.split(',').map(value => parseFloat(value))
+    const values = valuesInput.value.split(',').map(value => parseInt(value))
     return [...values]
 }
 
@@ -57,7 +80,7 @@ function cantDivideByZero(){
 }
 
 function checkIfInputIsValid(){
-    const regularExpression = /^\d+(,\d+)$/    // CHECKING IF INPUT IS CORRECT (number,number)
+    const regularExpression = /^-?\d+(,-?\d+)$/    // CHECKING IF INPUT IS CORRECT (number,number)
     const values = getInputValues().join(',')
     return regularExpression.test(values)
 }
@@ -88,22 +111,31 @@ function disableInputAndButton(){
 
 // EVENT LISTENERS
 button.addEventListener('click', function(){
-    if (checkIfInputIsValid()){
-        const whichBoxIsActive = document.querySelector('.container-list-item-active')
-        const result = document.querySelector('#math-result')
-        const values = getInputValues()
-        if (whichBoxIsActive.dataset.functionName === 'divide' && values[1] === 0) {
-            disableInputAndButton()
-            displayInfo(`You can't divide by 0!! Please enter two values separated by comma. (a,b)`, 'failure')
-            clearInput()
-        } else {
-            result.innerText = executeFunctionByName(whichBoxIsActive.dataset.functionName, ...values)
-        }
-    } else {
+    // CHECKING IF INPUT VALUES ARE GIVEN PROPERLY
+    if (!checkIfInputIsValid()){
         disableInputAndButton()
         displayInfo('Please enter two values separated by comma. (a,b)', 'failure')
         clearInput()
+        return
     }
+    const whichBoxIsActive = document.querySelector('.container-list-item-active')
+    const result = document.querySelector('#math-result')
+    const values = getInputValues()
+    // DIVISION CONDITION - SECOND VALUE IS NOT 0
+    if (whichBoxIsActive.dataset.functionName === 'divide' && values[1] === 0){
+        disableInputAndButton()
+        displayInfo(`You can't divide by 0! Please enter two values separated by comma. (a,b)`, 'failure')
+        clearInput()
+        return
+    }
+    // LCM CONDITION - FIRST OR SECOND VALUE IS NOT 0
+    if (whichBoxIsActive.dataset.functionName === 'nww' && (values[0] <= 0 || values[1] <= 0)){
+        disableInputAndButton()
+        displayInfo(`Please provide positive integers!! Please enter two values separated by comma. (a,b)`, 'failure')
+        clearInput()
+        return
+    }
+    result.innerText = executeFunctionByName(whichBoxIsActive.dataset.functionName, ...values)
 })
 
 actionBtns.forEach(button => {
