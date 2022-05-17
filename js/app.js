@@ -4,7 +4,7 @@ const valuesInput = document.querySelector('#values')
 
 /**
  * math functions wrapped inside outer function
- * @returns {functions} add / subtract / multiply / divide / nwd / nww
+ * @returns {functions} add / subtract / multiply / divide / gcd / lcm
  */
 const mathFunction = (function(){
     // adds two numbers
@@ -28,12 +28,12 @@ const mathFunction = (function(){
     }
 
     /**
-     * greatest common divisor (największy wspólny dzielnik)
+     * greatest common divisor of two numbers
      * @param {number} a 
      * @param {number} b 
-     * @returns {number} greatest common divisor of two numbers
+     * @returns {number}
      */
-    function nwd(a, b){ 
+    function gcd(a, b){ 
         if (a === 0 && b === 0) return 0
         if (a === 0) return Math.abs(b)
         if (b === 0) return Math.abs(a)
@@ -50,13 +50,13 @@ const mathFunction = (function(){
     }
 
     /**
-     * least common multiple (najmniejsza wspólna wielokrotność)
+     * least common multiple of two numbers
      * @param {number} a 
      * @param {number} b 
-     * @returns {number} least common multiple of two numbers
+     * @returns {number}
      */
-    function nww(a, b){ 
-        return (a * b) / nwd(a, b)
+    function lcm(a, b){ 
+        return (a * b) / gcd(a, b)
     }
 
     return {
@@ -64,8 +64,8 @@ const mathFunction = (function(){
         subtract,
         multiply,
         divide,
-        nwd,
-        nww
+        gcd,
+        lcm
     }
 })()
 
@@ -104,7 +104,7 @@ function clearInput(){
 }
 
 /**
- * checks if user entered values the correct way (integer, integer)
+ * checks if user entered values the correct way (integer,integer)
  * @returns {boolean}
  */
 function checkIfInputIsValid(){
@@ -167,10 +167,10 @@ computeBtn.addEventListener('click', function(){
         return
     }
     /**
-     * checks if action to compute is least common multiple(najmniejsza wspólna wielokrotność) and if values <= 0,
+     * checks if action to compute is lcm(least common multiple) and if values <= 0,
      * if true: disable interface, display message, clear input, return
      */
-    if (whichBoxIsActive.dataset.actionName === 'nww' && (values[0] <= 0 || values[1] <= 0)){
+    if (whichBoxIsActive.dataset.actionName === 'lcm' && (values[0] <= 0 || values[1] <= 0)){
         disableInputAndButton()
         displayAlert(`Please provide positive integers!! Please enter two values separated by comma. (a,b)`, 'failure')
         clearInput()
