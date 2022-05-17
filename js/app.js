@@ -1,27 +1,39 @@
-// DECLARATIONS
-const button = document.querySelector('#math-button')
-const actionBtns = document.querySelectorAll('[data-function-name]')
+const computeBtn = document.querySelector('#compute-btn')
+const actionBtns = document.querySelectorAll('[data-action-name]')
 const valuesInput = document.querySelector('#values')
 
-// JS MATH FUNCTIONS
+/**
+ * math functions wrapped inside outer function
+ * @returns {functions} add / subtract / multiply / divide / nwd / nww
+ */
 const mathFunction = (function(){
+    // adds two numbers
     function add(a, b){
         return a + b
     }
     
+    // subtract two numbers
     function subtract(a, b){
         return a - b
     }
     
+    // multiply two numbers
     function multiply(a, b){
         return a * b
     }
 
-    function divide(a,b){
+    // divide two numbers
+    function divide(a, b){
         return a / b
     }
 
-    function nwd(a,b){ // greatest common divisor (największy wspólny dzielnik)
+    /**
+     * greatest common divisor (największy wspólny dzielnik)
+     * @param {number} a 
+     * @param {number} b 
+     * @returns {number} greatest common divisor of two numbers
+     */
+    function nwd(a, b){ 
         if (a === 0 && b === 0) return 0
         if (a === 0) return Math.abs(b)
         if (b === 0) return Math.abs(a)
@@ -37,8 +49,14 @@ const mathFunction = (function(){
         return dividedBy(a).find(elem => secondArray.includes(elem))
     }
 
-    function nww(a,b){
-        return (a * b) / nwd(a,b)
+    /**
+     * least common multiple (najmniejsza wspólna wielokrotność)
+     * @param {number} a 
+     * @param {number} b 
+     * @returns {number} least common multiple of two numbers
+     */
+    function nww(a, b){ 
+        return (a * b) / nwd(a, b)
     }
 
     return {
@@ -51,12 +69,19 @@ const mathFunction = (function(){
     }
 })()
 
-// EXECUTE FUNCTION 
+/**
+ * takes data-attribute value(string) from active button and invokes correct math function
+ * @param {string} callback 
+ * @param {...number} args 
+ * @returns {function} chosen math function
+ */
 function executeFunctionByName(callback, ...args){
     return mathFunction[callback](...args)
 }
 
-// OTHER FUNCTIONS
+/**
+ * makes chosen button active and makes old active button not active anymore
+ */
 function toggleActiveButton(){
     const oldActiveButton = document.querySelector('.container-list-item-active')
     const newActiveButton = this
@@ -64,22 +89,36 @@ function toggleActiveButton(){
     newActiveButton.classList.add('container-list-item-active')
 }
 
+/**
+ * takes values from input HTML tag and converts them to integers
+ * @returns {array} of values
+ */
 function getInputValues(){
     const values = valuesInput.value.split(',').map(value => parseInt(value))
     return [...values]
 }
 
+// clears input value
 function clearInput(){
     valuesInput.value = ''
 }
 
+/**
+ * checks if user entered values the correct way (integer, integer)
+ * @returns {boolean}
+ */
 function checkIfInputIsValid(){
-    const regularExpression = /^-?\d+(,-?\d+)$/    // CHECKING IF INPUT IS CORRECT (number,number)
+    const regularExpression = /^-?\d+(,-?\d+)$/
     const values = getInputValues().join(',')
     return regularExpression.test(values)
 }
 
-function displayInfo(message, action){
+/**
+ * displays message to user 
+ * @param {string} message 
+ * @param {string} action in CSS there are different colors for different actions
+ */
+function displayAlert(message, action){
     const info = document.querySelector('#math-values-info')
     info.textContent = message
     info.classList.add(action)
@@ -89,48 +128,59 @@ function displayInfo(message, action){
     }, 2000)
 }
 
+// disables compute button and input - so far it is used when displaying message to user
 function disableInputAndButton(){
-    button.disabled = true
+    computeBtn.disabled = true
     valuesInput.disabled = true
-    button.classList.add('disabled')
+    computeBtn.classList.add('disabled')
     valuesInput.classList.add('disabled')
     setTimeout(() => {
-        button.disabled = false
+        computeBtn.disabled = false
         valuesInput.disabled = false
-        button.classList.remove('disabled')
+        computeBtn.classList.remove('disabled')
         valuesInput.classList.remove('disabled')
     }, 2000)
 }
 
-// EVENT LISTENERS
-button.addEventListener('click', function(){
-    // CHECKING IF INPUT VALUES ARE GIVEN PROPERLY
+
+computeBtn.addEventListener('click', function(){
+    /**
+     * checks if user typed values properly,
+     * if false: disable interface, display message, clear input, return
+     */
     if (!checkIfInputIsValid()){
         disableInputAndButton()
-        displayInfo('Please enter two values separated by comma. (a,b)', 'failure')
+        displayAlert('Please enter two values separated by comma. (a,b)', 'failure')
         clearInput()
         return
     }
     const whichBoxIsActive = document.querySelector('.container-list-item-active')
-    const result = document.querySelector('#math-result')
     const values = getInputValues()
-    // DIVISION CONDITION, SECOND VALUE = 0
-    if (whichBoxIsActive.dataset.functionName === 'divide' && values[1] === 0){
+    /**
+     * checks if action to compute is divide and second value = 0,
+     * if true: disable interface, display message, clear input, return
+     */
+    if (whichBoxIsActive.dataset.actionName === 'divide' && values[1] === 0){
         disableInputAndButton()
-        displayInfo(`You can't divide by 0! Please enter two values separated by comma. (a,b)`, 'failure')
+        displayAlert(`You can't divide by 0! Please enter two values separated by comma. (a,b)`, 'failure')
         clearInput()
         return
     }
-    // LCM CONDITION, FIRST OR SECOND VALUE < 0
-    if (whichBoxIsActive.dataset.functionName === 'nww' && (values[0] <= 0 || values[1] <= 0)){
+    /**
+     * checks if action to compute is least common multiple(najmniejsza wspólna wielokrotność) and if values <= 0,
+     * if true: disable interface, display message, clear input, return
+     */
+    if (whichBoxIsActive.dataset.actionName === 'nww' && (values[0] <= 0 || values[1] <= 0)){
         disableInputAndButton()
-        displayInfo(`Please provide positive integers!! Please enter two values separated by comma. (a,b)`, 'failure')
+        displayAlert(`Please provide positive integers!! Please enter two values separated by comma. (a,b)`, 'failure')
         clearInput()
         return
     }
-    result.innerText = executeFunctionByName(whichBoxIsActive.dataset.functionName, ...values)
+    const result = document.querySelector('#math-result')
+    // computes values and displays result
+    result.innerText = executeFunctionByName(whichBoxIsActive.dataset.actionName, ...values)
 })
 
-actionBtns.forEach(button => {
-    button.addEventListener('click', toggleActiveButton)
+actionBtns.forEach(btn => {
+    btn.addEventListener('click', toggleActiveButton)
 })
