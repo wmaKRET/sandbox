@@ -1,7 +1,7 @@
 # js sandbox
 
 ## General info
-### The whole project is for learning purposes only. 
+### The whole project is for learning purposes only. Check 'dev' branch for recent pushes.
 
 ## Technologies 
 html, scss, javascript
