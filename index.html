@@ -12,43 +12,67 @@
     <header>
         <nav class="navbar">
             <a href="./index.html" class="navbar-item">js math</a>
-            <a href="" class="navbar-item">under construction</a>
-            <a href="" class="navbar-item">under construction</a>
+            <a href="" class="navbar-item">js words</a>
+            <a href="" class="navbar-item">js dom</a>
         </nav>
     </header>
     <main class="container">
-        <div class="container-header">
-            <p class="container-header-item container-title">CHOOSE OPERATION AND ENTER VALUES</p>
-            <p class="container-header-item container-title" id="math-values-info">Please enter values like so: a,b</p>
-            <input type="text" name="values" id="values" placeholder="a,b" class=" container-header-item container-header-input">    
-            <button class="container-header-item container-header-button" id="compute-btn">compute</button>
-            <p class="container-header-item container-result" id="math-result">__</p>
+        <div class="jsheader hidden">
+            <div class="jsmath-header">
+                <p class="jsmath-header-item jsmath-title">CHOOSE OPERATION AND ENTER VALUES</p>
+                <p class="jsmath-header-item jsmath-title" id="math-values-info">Please enter values like so: a,b</p>
+                <input type="text" name="values" id="values" placeholder="a,b" class=" jsmath-header-item jsmath-header-input">    
+                <button class="jsmath-header-item jsmath-header-button" id="compute-btn">compute</button>
+                <p class="jsmath-header-item jsmath-result" id="math-result">__</p>
+            </div>
         </div>
-        <div class="container-list">
-            <button class="container-list-item container-list-item-active" data-action-name="add">
-                <p class="container-title">a + b</p>
-                <p class="container-info">Add two values</p>
-            </button>
-            <button class="container-list-item" data-action-name="subtract">
-                <p class="container-title">a - b</p>
-                <p class="container-info">Subtract two values</p>
-            </button>
-            <button class="container-list-item" data-action-name="multiply">
-                <p class="container-title">a * b</p>
-                <p class="container-info">Multiply two values</p>
-            </button>
-            <button class="container-list-item" data-action-name="divide">
-                <p class="container-title">a / b</p>
-                <p class="container-info">Divide two values</p>
-            </button>
-            <button class="container-list-item" data-action-name="gcd">
-                <p class="container-title">GCD</p>
-                <p class="container-info">Greatest common divisor</p>
-            </button>
-            <button class="container-list-item" data-action-name="lcm">
-                <p class="container-title">LCM</p>
-                <p class="container-info">Least common multiple</p>
-            </button>
+        <div class="jsmath hidden">
+            <div class="jsmath-panel">
+                <button class="jsmath-title panel-button">J S &nbsp;M A T H</button>
+            </div>
+            <!-- <div class="jsmath-header">
+                <p class="jsmath-header-item jsmath-title">CHOOSE OPERATION AND ENTER VALUES</p>
+                <p class="jsmath-header-item jsmath-title" id="math-values-info">Please enter values like so: a,b</p>
+                <input type="text" name="values" id="values" placeholder="a,b" class=" jsmath-header-item jsmath-header-input">    
+                <button class="jsmath-header-item jsmath-header-button" id="compute-btn">compute</button>
+                <p class="jsmath-header-item jsmath-result" id="math-result">__</p>
+            </div> -->
+            <div class="jsmath-list">
+                <button class="jsmath-list-item jsmath-list-item-active" data-action-name="add">
+                    <p class="jsmath-title">a + b</p>
+                    <p class="jsmath-info">Add two values</p>
+                </button>
+                <button class="jsmath-list-item" data-action-name="subtract">
+                    <p class="jsmath-title">a - b</p>
+                    <p class="jsmath-info">Subtract two values</p>
+                </button>
+                <button class="jsmath-list-item" data-action-name="multiply">
+                    <p class="jsmath-title">a * b</p>
+                    <p class="jsmath-info">Multiply two values</p>
+                </button>
+                <button class="jsmath-list-item" data-action-name="divide">
+                    <p class="jsmath-title">a / b</p>
+                    <p class="jsmath-info">Divide two values</p>
+                </button>
+                <button class="jsmath-list-item" data-action-name="gcd">
+                    <p class="jsmath-title">GCD</p>
+                    <p class="jsmath-info">Greatest common divisor</p>
+                </button>
+                <button class="jsmath-list-item" data-action-name="lcm">
+                    <p class="jsmath-title">LCM</p>
+                    <p class="jsmath-info">Least common multiple</p>
+                </button>
+            </div>            
+        </div>
+        <div class="jswords hidden">
+            <div class="jswords-panel">
+                <button class="jswords-title panel-button">J S &nbsp;W O R D S</button>
+            </div>
+        </div>
+        <div class="jsdom hidden">
+            <div class="jsdom-panel">
+                <button class="jsdom-title panel-button">J S &nbsp;D O M</button>
+            </div>
         </div>
     </main>
     <footer class="footer">

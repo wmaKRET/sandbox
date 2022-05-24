@@ -1,6 +1,7 @@
 const computeBtn = document.querySelector('#compute-btn')
 const actionBtns = document.querySelectorAll('[data-action-name]')
 const valuesInput = document.querySelector('#values')
+const panelsBtns = document.querySelectorAll('.panel-button')
 
 /**
  * math functions wrapped inside outer function
@@ -83,10 +84,20 @@ function executeFunctionByName(callback, ...args){
  * makes chosen button active and makes old active button not active anymore
  */
 function toggleActiveButton(){
-    const oldActiveButton = document.querySelector('.container-list-item-active')
+    const oldActiveButton = document.querySelector('.jsmath-list-item-active')
     const newActiveButton = this
-    oldActiveButton.classList.remove('container-list-item-active')
-    newActiveButton.classList.add('container-list-item-active')
+    oldActiveButton.classList.remove('jsmath-list-item-active')
+    newActiveButton.classList.add('jsmath-list-item-active')
+}
+
+/**
+ * ...
+ */
+function togglePanelButton(){
+    const header = document.querySelector('.jsheader')
+    const panelBtn = this.parentElement.parentElement
+    header.classList.toggle('hidden')
+    panelBtn.classList.toggle('hidden')
 }
 
 /**
@@ -154,7 +165,7 @@ computeBtn.addEventListener('click', function(){
         clearInput()
         return
     }
-    const whichBoxIsActive = document.querySelector('.container-list-item-active')
+    const whichBoxIsActive = document.querySelector('.jsmath-list-item-active')
     const values = getInputValues()
     /**
      * checks if action to compute is divide and second value = 0,
@@ -183,4 +194,8 @@ computeBtn.addEventListener('click', function(){
 
 actionBtns.forEach(btn => {
     btn.addEventListener('click', toggleActiveButton)
+})
+
+panelsBtns.forEach(btn => {
+    btn.addEventListener('click', togglePanelButton)
 })

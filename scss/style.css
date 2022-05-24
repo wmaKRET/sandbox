@@ -8,6 +8,7 @@
           flex-direction: row;
   padding: 1rem 2rem;
   background-color: #777777;
+  border-bottom: solid 1px #a5a5a5;
 }
 
 .navbar-item {
@@ -62,6 +63,26 @@ a {
 }
 
 .container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  visibility: visible;
+  opacity: 1;
+}
+
+.container .hidden {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.container .hidden :not(:first-child) {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.jsmath, .jswords, .jsdom {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -69,23 +90,52 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin: 0.1em 0;
+  padding: 0.25em;
+  border-top: solid 2px #777777;
+  border-bottom: solid 2px #777777;
+  background-color: #777777;
 }
 
-.container-title {
+.jsmath-title, .jswords-title, .jsdom-title {
   font-size: 1.25rem;
 }
 
-.container-info {
+.jsmath-info, .jswords-info, .jsdom-info {
   font-size: 0.75rem;
 }
 
-.container-result {
+.jsmath-result, .jswords-result, .jsdom-result {
   font-size: 1.5rem;
 }
 
-.container-header {
+.jsmath-panel, .jswords-panel, .jsdom-panel {
   width: 100%;
-  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.jsmath .panel-button, .jswords .panel-button, .jsdom .panel-button {
+  padding: 0.25em 1.5em;
+  font-size: 1.25rem;
+  color: white;
+  background-color: #777777;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.jsmath .panel-button:hover, .jswords .panel-button:hover, .jsdom .panel-button:hover {
+  color: #a5a5a5;
+}
+
+.jsmath-header {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -103,23 +153,23 @@ a {
   transition: all 0.2s ease-out;
 }
 
-.container-header .disabled {
+.jsmath-header .disabled {
   border: solid #c07171 2px;
 }
 
-.container-header .disabled:hover {
+.jsmath-header .disabled:hover {
   border: solid #c07171 2px;
 }
 
-.container-header .failure {
+.jsmath-header .failure {
   color: #c07171;
 }
 
-.container-header-item {
+.jsmath-header-item {
   margin: 0.25em;
 }
 
-.container-header-input {
+.jsmath-header-input {
   width: 300px;
   text-align: center;
   font-size: 1.25rem;
@@ -132,13 +182,13 @@ a {
   transition: all 0.2s ease-out;
 }
 
-.container-header-input:focus {
+.jsmath-header-input:focus {
   color: white;
   background-color: #777777;
   border: solid white 2px;
 }
 
-.container-header-button {
+.jsmath-header-button {
   width: 300px;
   font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.808);
@@ -150,13 +200,16 @@ a {
   transition: all 0.2s ease-out;
 }
 
-.container-header-button:hover {
+.jsmath-header-button:hover {
   color: white;
   border: solid white 2px;
 }
 
-.container-list {
+.jsmath-list {
   width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -169,7 +222,7 @@ a {
   padding: 1em;
 }
 
-.container-list-item {
+.jsmath-list-item {
   width: 250px;
   height: 100px;
   display: -webkit-box;
@@ -194,23 +247,23 @@ a {
   transition: all 0.2s ease-out;
 }
 
-.container-list-item p {
+.jsmath-list-item p {
   padding: 0.5em;
 }
 
-.container-list-item:hover {
+.jsmath-list-item:hover {
   color: rgba(255, 255, 255, 0.808);
   border: solid rgba(255, 255, 255, 0.808) 2px;
 }
 
-.container-list-item-active {
+.jsmath-list-item-active {
   color: white;
   border: solid white 2px;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
-.container-list-item-active:hover {
+.jsmath-list-item-active:hover {
   color: white;
   border: solid white 2px;
 }

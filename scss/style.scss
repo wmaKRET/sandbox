@@ -1,16 +1,4 @@
-// COLOURS
-$background: rgb(165, 165, 165);
-$background2: rgb(119, 119, 119);
-$almostwhite: rgba(255, 255, 255, 0.808);
-$white: white;
-$warning: rgb(192, 113, 113);
-
-// FONTS
-$font-sm: 0.75rem;
-$font-std: 1rem;
-$font-md: 1.25rem;
-$font-lg: 1.5rem;
-
+@import "variables";
 @import "header";
 @import "footer";
 
@@ -33,8 +21,31 @@ a {
 }
 
 .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    visibility: visible;
+    opacity: 1;
+
+    .hidden {
+
+        transition: all 0.2s ease-out;
+        :not(:first-child){
+            display: none;
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+}
+
+.jsmath, .jswords, .jsdom {
     display: flex;
     flex-direction: column;
+  
+    margin: 0.1em 0;
+    padding: 0.25em;
+    border-top: solid 2px $background2;
+    border-bottom: solid 2px $background2;
+    background-color: $background2;
 
     &-title {
         font-size: $font-md;
@@ -48,9 +59,31 @@ a {
         font-size: $font-lg;
     }
 
+    &-panel {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .panel-button {
+        padding: 0.25em 1.5em;
+        font-size: $font-md;
+        color: $white;
+        background-color: $background2;
+        border: none;
+        cursor: pointer;
+        
+        transition: all 0.2s ease-out;
+        &:hover {
+            color: $background;
+        }
+    }
+}
+
+.jsmath {
+
     &-header {
         width: 100%;
-        height: 200px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -110,6 +143,7 @@ a {
 
     &-list {
         width: 100%;
+        justify-content: center;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
