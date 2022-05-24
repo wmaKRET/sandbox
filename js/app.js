@@ -94,9 +94,9 @@ function toggleActiveButton(){
  * ...
  */
 function togglePanelButton(){
-    const header = document.querySelector('.jsheader')
+    //const header = document.querySelector('.jsheader')
     const panelBtn = this.parentElement.parentElement
-    header.classList.toggle('hidden')
+    //if (header.classList.contains('hidden')) header.classList.toggle('hidden')
     panelBtn.classList.toggle('hidden')
 }
 
