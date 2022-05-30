@@ -34,9 +34,10 @@ const mathFunction = (function(){
      * @returns {Array}
      */
     function divisibleWithoutRemainder(number){
-        return Array(number).fill()
+        const absNumber = Math.abs(number)
+        return Array(absNumber).fill()
                             .map((elem,i) => i + 1)
-                            .filter(elem => number % elem === 0)
+                            .filter(elem => absNumber % elem === 0)
                             .sort((a,b) => b - a)
     }
 
