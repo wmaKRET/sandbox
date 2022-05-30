@@ -4,7 +4,7 @@ const valuesInput = document.querySelector('#values')
 
 /**
  * math functions wrapped inside outer function
- * @returns {functions} add / subtract / multiply / divide / gcd / lcm
+ * @returns {object} add / subtract / multiply / divide / gcd / lcm
  */
 const mathFunction = (function(){
     // adds two numbers
@@ -28,6 +28,20 @@ const mathFunction = (function(){
     }
 
     /**
+     * returns Set of divisors(without remainder) of a number
+     * @param {number} number
+     * @returns {Set}
+     */
+    function divisibleWithoutRemainder(number){
+        let array = []
+        for (let i = 1, max = Math.abs(number); i <= max; i++){
+            if (number % i === 0) array.push(i)
+        }
+        const mySet = new Set(array.sort((x,y) => y - x))
+        return mySet
+    }
+
+    /**
      * greatest common divisor of two numbers
      * @param {number} a 
      * @param {number} b 
@@ -38,15 +52,11 @@ const mathFunction = (function(){
         if (a === 0) return Math.abs(b)
         if (b === 0) return Math.abs(a)
 
-        function dividedBy(number){
-            let array = []
-            for (let i = 1; i <= Math.abs(number); i++){
-                if (number % i === 0) array.push(i)
-            }
-            return array.sort((x,y) => y - x)
+        const firstIntegerDivisors = divisibleWithoutRemainder(a)
+        const secondIntegerDivisors = divisibleWithoutRemainder(b)
+        for (const value of firstIntegerDivisors) {
+            if (secondIntegerDivisors.has(value)) return value
         }
-        const secondArray = dividedBy(b)
-        return dividedBy(a).find(elem => secondArray.includes(elem))
     }
 
     /**
