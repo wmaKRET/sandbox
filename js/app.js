@@ -29,16 +29,15 @@ const mathFunction = (function(){
 
     /**
      * returns Set of divisors(without remainder) of a number
+     * used in 'greatest common divisor' function
      * @param {number} number
-     * @returns {Set}
+     * @returns {Array}
      */
     function divisibleWithoutRemainder(number){
-        let array = []
-        for (let i = 1, max = Math.abs(number); i <= max; i++){
-            if (number % i === 0) array.push(i)
-        }
-        const mySet = new Set(array.sort((x,y) => y - x))
-        return mySet
+        return Array(number).fill()
+                            .map((elem,i) => i + 1)
+                            .filter(elem => number % elem === 0)
+                            .sort((a,b) => b - a)
     }
 
     /**
@@ -52,10 +51,10 @@ const mathFunction = (function(){
         if (a === 0) return Math.abs(b)
         if (b === 0) return Math.abs(a)
 
-        const firstIntegerDivisors = divisibleWithoutRemainder(a)
-        const secondIntegerDivisors = divisibleWithoutRemainder(b)
-        for (const value of firstIntegerDivisors) {
-            if (secondIntegerDivisors.has(value)) return value
+        const firstNumberDivisors = new Set(divisibleWithoutRemainder(a))
+        const secondNumberDivisors = new Set(divisibleWithoutRemainder(b))
+        for (const value of firstNumberDivisors) {
+            if (secondNumberDivisors.has(value)) return value
         }
     }
 
